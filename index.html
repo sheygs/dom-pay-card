@@ -329,8 +329,7 @@
 
      };
 
-     const calc = e => (e*2 < 10) ? e*2 : e*2-9;
-
+const calc = e => (e*2 < 10) ? e*2 : e*2-9;
 const validateWithLuhn = (digits) => {
   const isValid = digits => {
     return digits
@@ -344,31 +343,24 @@ const validateWithLuhn = (digits) => {
 const validateCardNumber = () => {
   const cardNumber = document.querySelectorAll("[data-cc-digits] input");
   
-  let inputs = "",
-      index = 0;
-  while (index < 4) {
-    inputs += cardNumber[index++].value;
-  }
-  const digits = inputs.split("");
-  const isValid = validateWithLuhn(digits);
-  const target = document.querySelector("[data-cc-digits]");
-  if (isValid) {
-    target.classList.remove("is-invalid");
-  } else {
-    target.classList.add("is-invalid");
-  }
-  return isValid;
-
+     let inputs = "",
+         index = 0;
+     while (index < 4) {
+         inputs += cardNumber[index++].value;
+     }
+     const digits = inputs.split("");
+     const isValid = validateWithLuhn(digits);
+     const target = document.querySelector("[data-cc-digits]");
+     if (isValid) {
+       target.classList.remove("is-invalid");
+     } else {
+       target.classList.add("is-invalid");
+     }
+     return isValid;
   
 }
 
      const uiCanInteract = () => {
-       /*remove this */ 
-       let onblur = document.querySelector("[data-cc-digits] input");
-        onblur.addEventListener("blur",detectCardType);
-        onblur.focus();
-
-
        const firstInput = document.querySelector('[data-cc-digits]').firstElementChild.focus();
        document.querySelector('[data-pay-btn]').addEventListener('click', validatePayment);
        billHype();
@@ -376,10 +368,6 @@ const validateCardNumber = () => {
      };
      
 
-     /*
-     https://randomapi.com/api/006b08a801d82d0c9824dcfdfdfa3b3c
-     use the API to extract result
-     */
      const displayCartTotal = ({ results }) => {
         const [data] = results;
         const { itemsInCart, buyerCountry } = data;
