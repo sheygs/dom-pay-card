@@ -269,9 +269,10 @@
      
 
      const detectCardType = (first4Digits) => {
-      let div = document.querySelector("div[data-credit-card]");
-      let img = document.querySelector("img[data-card-type]");
-      let val = first4Digits.value.substring(0,1);
+      first4Digits = document.querySelector('[data-cc-digits] input:nth-child(1)'); 
+      const div = document.querySelector("div[data-credit-card]");
+      const img = document.querySelector("img[data-card-type]");
+      const val = first4Digits.value.substring(0,1);
       if (val ==="4"){
           div.classList.add("is-visa");
           div.classList.remove("is-mastercard");
