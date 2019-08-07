@@ -210,6 +210,7 @@
         }
       ];
       
+      //billhype
       const billHype = () => {
           const billDisplay = document.querySelector('.mdc-typography--headline4');
           if (!billDisplay) return;
@@ -239,6 +240,7 @@
         }
         
       };
+
     
      const flagIfInvalid = (field,isValid) => {
          if (isValid){
@@ -248,11 +250,15 @@
              field.classList.add('is-invalid');
          }
      }
+
+
     
      const expiryDateFormatIsValid = (field) => {
          let regex = /^(0?[1-9]|1[0-2])\/\d{2}$/;
          return regex.test(field.value);
      }
+
+
 
      const isFutureDate = (date) => {
         const currentDate = new Date();
@@ -279,7 +285,7 @@
           img.src = supportedCards.visa;
           return "is-visa";
         }
-        else if (val ==="5"){
+      else if (val ==="5"){
           div.classList.add("is-mastercard");
           div.classList.remove("is-visa");
           img.src = supportedCards.mastercard;
@@ -303,6 +309,7 @@
        return isValid;
      };
 
+
      const validateCardNumber = () => {};
 
      const validatePayment = () => {
@@ -315,7 +322,8 @@
      const smartCursor = (event, fieldIndex, fields) => {};
      
      const enableSmartTyping = () => {
-       const inputValues = document.querySelectorAll('[data-cc-digits] input'); 
+       const inputValues = document.querySelectorAll('[data-cc-digits] input');
+       console.log(inputValues); 
        const arr = [...inputValues];  
        arr.forEach((field,index,fields) => {
          field.addEventListener('keyup', event => {
@@ -329,36 +337,7 @@
 
      };
 
-const calc = e => (e*2 < 10) ? e*2 : e*2-9;
-const validateWithLuhn = (digits) => {
-  const isValid = digits => {
-    return digits
-    .map((elt,i) => (i % 2 === 0) ?
-     calc(elt) : 
-     parseInt(elt))
-     .reduce((prv, cur) => (prv + cur)) % 10 === 0;
-  }
-}
 
-const validateCardNumber = () => {
-  const cardNumber = document.querySelectorAll("[data-cc-digits] input");
-  
-     let inputs = "",
-         index = 0;
-     while (index < 4) {
-         inputs += cardNumber[index++].value;
-     }
-     const digits = inputs.split("");
-     const isValid = validateWithLuhn(digits);
-     const target = document.querySelector("[data-cc-digits]");
-     if (isValid) {
-       target.classList.remove("is-invalid");
-     } else {
-       target.classList.add("is-invalid");
-     }
-     return isValid;
-  
-}
 
      const uiCanInteract = () => {
        const firstInput = document.querySelector('[data-cc-digits]').firstElementChild.focus();
