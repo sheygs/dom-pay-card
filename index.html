@@ -314,15 +314,48 @@
 
      const validateCardNumber = () => {};
 
+
      const validatePayment = () => {
        validateCardNumber();
        validateCardHolderName();
        validateCardExpiryDate();
      };
 
-     const smartInput = (event, fieldIndex) => {};
+
+
+     const smartInput = (event, fieldIndex, fields) => {
+          const userInput = parseInt(event.key);
+          if (isNaN(userInput)){
+            return false;
+          }
+
+          const thisField = fields[fieldIndex];
+          if (thisField.value.length < thisField.getAttribute("size")){
+               appState.cardDigits[fieldIndex][thisField.value.length] = userInput;
+               
+               thisField.value = thisField.value + userInput;
+               if (fieldIndex == 0) {
+                   const digit = appState.cardDigits[0];
+                   detectCardType(digit);
+               }
+          }
+          if (fieldIndex < 3) {
+                setTimeout(() => {
+                  let textmask = '';
+                  let first4Digits = '';
+                  for (let i = 0; i < thisField.value.length; i++) {
+                     textmask += "#";
+                  }
+                thisField.value = textmask;
+                }, 500);
+          }
+     };
+
+
      const smartCursor = (event, fieldIndex, fields) => {};
      
+
+
      const enableSmartTyping = () => {
        const inputs = document.querySelectorAll('[data-cc-digits] input'); 
        const arrayInputs = [...inputs];
