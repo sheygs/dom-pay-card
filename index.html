@@ -237,10 +237,11 @@
         const { 
                 code = "US", currency = "USD"
         } = countries.find(item => item.country === buyerCountry);
-        return amount.toLocaleString(country.code, 
+        return amount.toLocaleString(
+                code, 
                 {
                   style: "currency", 
-                  currency: country.currency
+                  currency:currency
                 }
              );
       };
