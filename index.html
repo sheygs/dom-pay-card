@@ -234,13 +234,15 @@
       const appState = {};
 
       const formatAsMoney = (amount, buyerCountry) => {
-        const country = countries.find(item => item.country === buyerCountry);
-        if (country){
-        return amount.toLocaleString(country.code, {style: "currency", currency: country.currency});
-        }else {
-        return amount.toLocaleString('USD',{style: "currency", currency: "USD"})
-        }
-        
+        const { 
+                code = "US", currency = "USD"
+        } = countries.find(item => item.country === buyerCountry);
+        return amount.toLocaleString(country.code, 
+                {
+                  style: "currency", 
+                  currency: country.currency
+                }
+             );
       };
 
     
