@@ -158,6 +158,8 @@
     <script>
        const supportedCards = {
            //visa,mastercard
+           visa,
+           mastercard
        };
 
       
@@ -275,17 +277,15 @@
      
 
      const detectCardType = (first4Digits) => {
-      first4Digits = document.querySelector('[data-cc-digits] input:nth-child(1)'); 
       const div = document.querySelector("div[data-credit-card]");
       const img = document.querySelector("img[data-card-type]");
-      const val = first4Digits.value.substring(0,1);
-      if (val ==="4"){
+      if (first4Digits[0] ==="4"){
           div.classList.add("is-visa");
           div.classList.remove("is-mastercard");
           img.src = supportedCards.visa;
           return "is-visa";
         }
-      else if (val ==="5"){
+      else if (first4Digits[0] ==="5"){
           div.classList.add("is-mastercard");
           div.classList.remove("is-visa");
           img.src = supportedCards.mastercard;
@@ -322,14 +322,9 @@
      const smartCursor = (event, fieldIndex, fields) => {};
      
      const enableSmartTyping = () => {
-       const inputValues = document.querySelectorAll('[data-cc-digits] input');
-       console.log(inputValues); 
-       const arr = [...inputValues];  
-       arr.forEach((field,index,fields) => {
-         field.addEventListener('keyup', event => {
-           smartCursor(event, index, fields);
-         });
-
+       const inputs = document.querySelectorAll('[data-cc-digits] input'); 
+       const arrayInputs = [...inputs];
+       arrayInputs.forEach((field,index,fields) => {
          field.addEventListener('keydown', event => {
            smartInput(event,index);
          })
