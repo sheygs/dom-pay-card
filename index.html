@@ -311,8 +311,43 @@
        return isValid;
      };
 
+     const validateWithLuhn = digits => {
+            if (digits.length !== 16) {
+                return false;
+            }
+            let iCheck = 0;
+            iEven = false;
+            for (let i = digits.length - 1; i >= 0; i--) {
 
-     const validateCardNumber = () => {};
+                let digit = digits[i];
+                nDigits = parseInt(digit, 10);
+                if (iEven && (nDigits *= 2) > 9) {
+                    nDigits -= 9;
+                }
+                iCheck += nDigits;
+                iEven = !iEven;
+
+            }
+            return (iCheck % 10) == 0;
+        }
+
+
+     const validateCardNumber = () => {
+      const cardNumbers = appState.cardDigits.flat();
+            let inputs = "",
+                index = 0;
+            while (index < 4) {
+                inputs += cardNumbers[index++].value;
+            }
+            const digits = inputs.split(" ");
+            const isValid = validateWithLuhn(digits);
+            const target = document.querySelector("div[data-cc-digits]");
+            if (isValid) {
+                target.classList.remove("is-invalid");
+            } else {
+                target.classList.add("is-invalid");
+            }
+     };
 
 
      const validatePayment = () => {
@@ -352,7 +387,16 @@
      };
 
 
-     const smartCursor = (event, fieldIndex, fields) => {};
+     const smartCursor = (event, fieldIndex, fields) => {
+           for (let i = 0; i < fields.length; i++) {
+                if (fields[i].value.length === 4) {
+                    if (i === fields.length - 1) {
+                        return fields[i].blur();
+                    }
+                    fields[i + 1].focus();
+                }
+            }
+     };
      
 
 
@@ -376,10 +420,15 @@
      };
      
 
-     const displayCartTotal = ({ results }) => {
+     const displayCartTotal = 
+         ({ 
+           results 
+         }) => {
         const [data] = results;
-        const { itemsInCart, buyerCountry } = data;
-
+        const { 
+               itemsInCart, 
+               buyerCountry      
+        } = data;
         appState.items = itemsInCart;
         appState.country = buyerCountry;
 
@@ -388,6 +437,10 @@
         document.querySelector('[data-bill]').textContent = appState.billFormatted;
 
         appState.cardDigits = [];
+        appState.cardDigits[0] = [];
+        appState.cardDigits[1] = [];
+        appState.cardDigits[2] = [];
+        appState.cardDigits[3] = [];
         uiCanInteract();
 
      }
