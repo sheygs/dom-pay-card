@@ -401,8 +401,7 @@
 
      const enableSmartTyping = () => {
        const inputs = document.querySelectorAll('[data-cc-digits] input'); 
-       const arrayInputs = [...inputs];
-       arrayInputs.forEach((field,index,fields) => {
+       inputs.forEach((field,index,fields) => {
         field.addEventListener("keyup", event => smartCursor(event, index, fields));
          field.addEventListener('keydown', event => smartInput(event,index, fields));
        })
