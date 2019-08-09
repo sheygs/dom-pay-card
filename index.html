@@ -241,7 +241,7 @@
                 code, 
                 {
                   style: "currency", 
-                  currency:currency
+                  currency
                 }
              );
       };
@@ -258,28 +258,12 @@
 
 
     
-     const expiryDateFormatIsValid = (field) => {
+     const expiryDateFormatIsValid = field => {
          let regex = /^(0?[1-9]|1[0-2])\/\d{2}$/;
          return regex.test(field.value);
      }
 
-
-
-     const isFutureDate = (date) => {
-        const currentDate = new Date();
-        const expiryDate = new Date();
-
-        const expiryMonth = parseInt((date.value.split('/')[0]), 10);
-        const expiryYear = parseInt((date.value.split('/')[1]), 10);
-
-        expiryDate.setMonth(`${expiryMonth}`);
-        expiryDate.setYear(`${expiryYear}`);
-
-        return expiryDate > currentDate;
-     };
-     
-
-     const detectCardType = (first4Digits) => {
+     const detectCardType = first4Digits => {
       const div = document.querySelector("div[data-credit-card]");
       const img = document.querySelector("img[data-card-type]");
       if (first4Digits[0] ==="4"){
@@ -295,6 +279,20 @@
           return "is-mastercard";
         }
      };
+
+      const isFutureDate = date => {
+         const currentDate = new Date();
+         const expiryDate = new Date();
+
+         const expiryMonth = parseInt((date.value.split('/')[0]), 10);
+         const expiryYear = parseInt((date.value.split('/')[1]), 10);
+
+         expiryDate.setMonth(`${expiryMonth}`);
+         expiryDate.setYear(`${expiryYear}`);
+
+         return expiryDate > currentDate;
+     };
+     
 
     
      const validateCardExpiryDate = () => {
