@@ -304,9 +304,9 @@
     
     
      const validateCardHolderName = () => {
-       const fullname = document.querySelector('[data-cc-info] > input');
-       const isValid = /^[a-zA-Z]{3,}[\s][a-zA-Z]{3,}$/.test(fullname.value)
-       flagIfInvalid(fullname, isValid);
+       const fullName = document.querySelector('[data-cc-info] > input');
+       const isValid = /^[a-zA-Z]{3,}[\s][a-zA-Z]{3,}$/.test(fullName.value)
+       flagIfInvalid(fullName, isValid);
        return isValid;
      };
 
