@@ -387,14 +387,9 @@
 
 
      const smartCursor = (event, fieldIndex, fields) => {
-           for (let i = 0; i < fields.length; i++) {
-                if (fields[i].value.length === 4) {
-                    if (i === fields.length - 1) {
-                        return fields[i].blur();
-                    }
-                    fields[i + 1].focus();
-                }
-            }
+          if (event.target.value.length === event.target.size){
+            fields[fieldIndex + 1].focus();
+          }
      };
      
 
