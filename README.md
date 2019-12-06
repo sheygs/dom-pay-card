@@ -1,2 +1,2 @@
 # PayCard
-A smart credit card system :sparkles:
+A smart credit card system :bank:
