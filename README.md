@@ -1,2 +1,2 @@
 # pay-card
-A smart credit card system :bank:
+> :credit_card: A smart credit card system 
